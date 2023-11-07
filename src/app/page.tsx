@@ -1,6 +1,7 @@
 'use client';
 import styled from 'styled-components';
 import TrimInput from './components/TrimInput';
+import {useState} from 'react';
 
 const Main = styled.main`
   display: flex;
@@ -12,10 +13,19 @@ const Main = styled.main`
 `
 
 export default function Home() {
+  const [todo, setTodo] = useState([] as string[]);
+  const addTodo = (things: string) => setTodo([...todo, things]);
   return (
     <Main>
       <h2>TODO</h2>
-      <TrimInput label='할일'/>
+      <ul>
+        {todo.map((s) => (
+        <li key={s}>
+          {s}
+        </li>
+        ))}
+      </ul>
+      <TrimInput label='할일' onEvent={addTodo}/>
     </Main>
   )
 }
