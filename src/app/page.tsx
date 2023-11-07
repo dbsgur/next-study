@@ -16,11 +16,12 @@ const Main = styled.main`
 export default function Home() {
   const [todos, setTodos] = useState([] as string[]);
   const addTodo = (todo: string) => setTodos([...todos, todo]);
+  const completeTodo = (idx: number) => setTodos([...todos.filter((todo, i) => i !== idx)]);
   return (
     <Main>
       <h2>TODO</h2>
       <ul>
-        <TodoList todos={todos} />
+        <TodoList todos={todos} onEvent={completeTodo}/>
       </ul>
       <TrimInput label='할일' onEvent={addTodo}/>
     </Main>
