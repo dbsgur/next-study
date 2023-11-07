@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 import TrimInput from './components/TrimInput';
 import {useState} from 'react';
+import TodoList from './components/TodoList';
 
 const Main = styled.main`
   display: flex;
@@ -13,17 +14,13 @@ const Main = styled.main`
 `
 
 export default function Home() {
-  const [todo, setTodo] = useState([] as string[]);
-  const addTodo = (things: string) => setTodo([...todo, things]);
+  const [todos, setTodos] = useState([] as string[]);
+  const addTodo = (todo: string) => setTodos([...todos, todo]);
   return (
     <Main>
       <h2>TODO</h2>
       <ul>
-        {todo.map((s) => (
-        <li key={s}>
-          {s}
-        </li>
-        ))}
+        <TodoList todos={todos} />
       </ul>
       <TrimInput label='할일' onEvent={addTodo}/>
     </Main>
